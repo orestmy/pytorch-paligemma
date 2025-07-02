@@ -21,7 +21,7 @@ pip install -r requirements.txt
 ```
 
 A set of pre-trained weights is required for inference. Download a PaLiGemma checkpoint (for example `paligemma-3b-pt-224`) and note the path on disk.
-
+https://huggingface.co/google/paligemma-3b-pt-224/tree/main
 ## Running inference
 
 Invoke `inference.py` with your model path, a text prompt and an image file:
