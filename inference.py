@@ -79,7 +79,9 @@ def test_inference(
     # Decode the generated tokens
     decoded = processor.tokenizer.decode(generated_tokens, skip_special_tokens=True)
 
-    print(prompt + decoded)
+    print(f"Q: {prompt}") 
+    print (f"token lenghts {len(generated_tokens)}")
+    print (f"Answer: {decoded}")
 
 
 def _sample_top_p(probs: torch.Tensor, p: float):
@@ -117,12 +119,13 @@ def main(
         if torch.cuda.is_available():
             device = "cuda"
         elif torch.backends.mps.is_available():
-            device = "mps"
+            device = "cpu"
 
     print("Device in use: ", device)
 
     print(f"Loading model")
     model, tokenizer = load_hf_model(model_path, device)
+    print("Loading model.to(device)")
     model = model.to(device).eval()
 
     num_image_tokens = model.config.vision_config.num_image_tokens
