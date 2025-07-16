@@ -1,6 +1,7 @@
 from PIL import Image
 import torch
 import fire
+import time
 
 from processing_paligemma import PaliGemmaProcessor
 from modeling_gemma import KVCache, PaliGemmaForConditionalGeneration
@@ -123,15 +124,21 @@ def main(
 
     print("Device in use: ", device)
 
+    # Measure time to load the model
+    start_time = time.time()
     print(f"Loading model")
     model, tokenizer = load_hf_model(model_path, device)
     model = model.eval()
+    load_time = time.time() - start_time
+    print(f"Model loaded in {load_time:.2f} seconds")
 
     num_image_tokens = model.config.vision_config.num_image_tokens
     image_size = model.config.vision_config.image_size
     processor = PaliGemmaProcessor(tokenizer, num_image_tokens, image_size)
 
+    # Measure time for inference
     print("Running inference")
+    start_time = time.time()
     with torch.no_grad():
         test_inference(
             model,
@@ -144,6 +151,8 @@ def main(
             top_p,
             do_sample,
         )
+    inference_time = time.time() - start_time
+    print(f"Inference completed in {inference_time:.2f} seconds")
 
 
 if __name__ == "__main__":
