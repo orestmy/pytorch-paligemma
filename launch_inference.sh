@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MODEL_PATH="$HOME/code/pytorch-paligemma/paligemma-weights"
-PROMPT="This tower located in "
+PROMPT="The tower name and height are respectively "
 IMAGE_FILE_PATH="test_images/IMG_0863.jpeg"
 MAX_TOKENS_TO_GENERATE=100
 TEMPERATURE=0.8
