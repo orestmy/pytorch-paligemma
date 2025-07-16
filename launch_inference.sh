@@ -2,7 +2,7 @@
 
 MODEL_PATH="$HOME/code/pytorch-paligemma/paligemma-weights"
 PROMPT="The sign on the image says "
-IMAGE_FILE_PATH="test_images/you_ara_here.png"
+IMAGE_FILE_PATH="test_images/you_are_here.png"
 MAX_TOKENS_TO_GENERATE=100
 TEMPERATURE=0.8
 TOP_P=0.9
