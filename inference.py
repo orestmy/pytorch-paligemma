@@ -125,8 +125,7 @@ def main(
 
     print(f"Loading model")
     model, tokenizer = load_hf_model(model_path, device)
-    print("Loading model.to(device)")
-    model = model.to(device).eval()
+    model = model.eval()
 
     num_image_tokens = model.config.vision_config.num_image_tokens
     image_size = model.config.vision_config.image_size
