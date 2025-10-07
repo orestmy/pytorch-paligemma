@@ -41,6 +41,30 @@ python inference.py \
 
 Additional flags allow configuring sampling behaviour, maximum tokens and device selection. See `launch_inference.sh` for an example.
 
+## Web Interface
+
+A web-based interface is available in the `paligemma-web-gui` directory. To run the web application:
+
+1. Ensure you have the additional requirements installed:
+```bash
+pip install flask gunicorn
+```
+
+2. Set the model path (if different from default):
+```bash
+export MODEL_PATH=path/to/paligemma-weights
+```
+
+3. Launch the web interface using Gunicorn:
+```bash
+cd paligemma-web-gui
+PYTHONPATH=/home/user/pytorch-paligemma gunicorn -b 0.0.0.0:5000 app:app
+```
+
+The web interface will be available at `http://localhost:5000`. You can upload images and ask questions about them through the browser.
+
+Note: When running on a remote server, replace `localhost` with your server's IP address and ensure port 5000 is accessible.
+
 ## Tests
 
 This project does not currently include automated tests.

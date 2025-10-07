@@ -19,10 +19,13 @@ model = None
 processor = None
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
+MAX_TOKENS = 200
+
+
 def load_models():
     global model, processor
     
-    model_path = os.getenv("MODEL_PATH", "../paligemma-weights/")
+    model_path = os.getenv("MODEL_PATH", "../paligemma-weights/paligemma-3b-ft-ocrvqa-896/")
     print(f"Loading models from: {model_path}")
     
     start_time = time.time()
@@ -38,7 +41,7 @@ def load_models():
     load_time = time.time() - start_time
     print(f"Model loaded in {load_time:.2f} seconds")
 
-def test_inference(prompt: str, image, max_tokens: int = 100, temperature: float = 0.8, 
+def test_inference(prompt: str, image, max_tokens: int = MAX_TOKENS, temperature: float = 0.8, 
                   top_p: float = 0.9, do_sample: bool = False):
     global model, processor
 
@@ -113,7 +116,7 @@ def process_image():
             response = test_inference(
                 prompt=question,
                 image=image,
-                max_tokens=100,
+                max_tokens=MAX_TOKENS,
                 temperature=0.8,
                 top_p=0.9,
                 do_sample=True
